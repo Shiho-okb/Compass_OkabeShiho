@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Register your seeders here
+        // 他のSeederクラスを登録
         $this->call([
-
+            UsersTableSeeder::class, // ユーザーデータのSeeder
+            SubjectsTableSeeder::class, // 科目データのSeeder
         ]);
     }
 }
