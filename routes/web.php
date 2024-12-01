@@ -22,6 +22,7 @@ use App\Http\Controllers\Authenticated\Users\UsersController;
 
 require __DIR__.'/auth.php';
 
+//ログイン後の人しか使えないルーティングのグループ(まとまり)
 Route::group(['middleware' => 'auth'], function(){
     Route::namespace('Authenticated')->group(function(){
         Route::namespace('Top')->group(function(){
