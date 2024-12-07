@@ -11,7 +11,10 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\MainCategoryFormRequest;
+use App\Http\Requests\BulletinBoard\SubCategoryFormRequest;
 use Auth;
+use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
 {
@@ -30,10 +33,10 @@ class PostsController extends Controller
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')
-            ->whereIn('id', $likes)->get();
+                ->whereIn('id', $likes)->get();
         }else if($request->my_posts){
             $posts = Post::with('user', 'postComments')
-            ->where('user_id', Auth::id())->get();
+                ->where('user_id', Auth::id())->get();
         }
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
     }
@@ -69,12 +72,26 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
-    public function mainCategoryCreate(Request $request){
+
+    //メインカテゴリーの追加
+    public function mainCategoryCreate(MainCategoryFormRequest $request){
+
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
 
-    public function commentCreate(Request $request){
+    //サブカテゴリーの追加
+    public function subCategoryCreate(SubCategoryFormRequest $request){
+
+        SubCategory::create([
+            'main_category_id' => $request->input('main_category'),
+            'sub_category' => $request->input('sub_category_name'),
+        ]);
+        return redirect()->route('post.input');
+    }
+
+    public function commentCreate(Request $request)
+    {
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
@@ -116,8 +133,8 @@ class PostsController extends Controller
         $like = new Like;
 
         $like->where('like_user_id', $user_id)
-             ->where('like_post_id', $post_id)
-             ->delete();
+            ->where('like_post_id', $post_id)
+            ->delete();
 
         return response()->json();
     }

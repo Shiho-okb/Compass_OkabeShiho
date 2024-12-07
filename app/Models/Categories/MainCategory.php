@@ -12,8 +12,11 @@ class MainCategory extends Model
         'main_category'
     ];
 
+    // main_categoriesテーブルとsub_categoriesテーブルのリレーション
+      // 1対多の関係 (1つのメインカテゴリーは複数のサブカテゴリーを持つ)
+      //「１対多」の「多」側 → メソッド名は複数形でhasManyを使う
     public function subCategories(){
-        // リレーションの定義
+        return $this->hasMany('App\Models\Categories\SubCategory');
     }
 
 }
