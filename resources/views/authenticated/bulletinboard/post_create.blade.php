@@ -44,6 +44,7 @@
         <!-- メインカテゴリーはすべてのロールで表示 -->
         <div class="">
           <!-- エラーメッセージ表示 -->
+          <!-- ->has()内は inputタグで送るname名 -->
           @if($errors->has('main_category_name'))
           <div class="text-danger" style="font-size:12px;">
             {{ $errors->first('main_category_name') }}
@@ -58,6 +59,7 @@
         @if (in_array(Auth::user()->role, [1, 2, 3]))
         <div class="mt-3">
           <!-- エラーメッセージ表示 -->
+          <!-- ->has()内は inputタグで送るname名 -->
           @if($errors->has('main_category'))
           <div class="text-danger" style="font-size:12px;">
             {{ $errors->first('main_category') }}

@@ -9,6 +9,7 @@ use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post;
 use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
+use App\Models\Posts\PostSubCategories;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use App\Http\Requests\BulletinBoard\MainCategoryFormRequest;
@@ -18,8 +19,9 @@ use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
 {
+    // 投稿一覧画面表示のためのメソッド
     public function show(Request $request){
-        $posts = Post::with('user', 'postComments')->get();
+        $posts = Post::with('user', 'postComments', 'subCategories')->get();
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
@@ -51,11 +53,19 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
 
+    //新規投稿のためのメソッド
     public function postCreate(PostFormRequest $request){
+        // dd($request->post_category_id);
         $post = Post::create([
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
             'post' => $request->post_body
+        ]);
+
+        PostSubCategories::create([
+            'post_id' => $post->id,
+            //$requestはbladeから取得してくる値
+            'sub_category_id' => $request->post_category_id,
         ]);
         return redirect()->route('post.show');
     }
@@ -73,14 +83,14 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    //メインカテゴリーの追加
+    //メインカテゴリーの追加のためのメソッド
     public function mainCategoryCreate(MainCategoryFormRequest $request){
 
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
 
-    //サブカテゴリーの追加
+    //サブカテゴリーの追加のためのメソッド
     public function subCategoryCreate(SubCategoryFormRequest $request){
 
         SubCategory::create([

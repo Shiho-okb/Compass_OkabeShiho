@@ -8,8 +8,8 @@ use App\Models\Users\User;
 
 class PostComment extends Model
 {
-    const UPDATED_AT = null;
-    const CREATED_AT = null;
+    // const UPDATED_AT = null;
+    // const CREATED_AT = null;
 
     protected $fillable = [
         'post_id',

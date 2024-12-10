@@ -8,7 +8,7 @@ use App\Models\Users\User;
 
 class Subjects extends Model
 {
-    const UPDATED_AT = null;
+    // const UPDATED_AT = null;
 
 
     protected $fillable = [
