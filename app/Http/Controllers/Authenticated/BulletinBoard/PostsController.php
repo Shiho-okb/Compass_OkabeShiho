@@ -19,8 +19,9 @@ use Illuminate\Validation\Rule;
 
 class PostsController extends Controller
 {
-    // 投稿一覧画面表示のためのメソッド
+    //投稿一覧画面表示のためのメソッド
     public function show(Request $request){
+        //postテーブルからリレーションで紐付けたuser・postComments・subCategoriesテーブルの情報を取得
         $posts = Post::with('user', 'postComments', 'subCategories')->get();
         $categories = MainCategory::get();
         $like = new Like;
@@ -54,6 +55,7 @@ class PostsController extends Controller
     }
 
     //新規投稿のためのメソッド
+    //引数の「PostFormRequest」はバリデーション用ファイルを表している
     public function postCreate(PostFormRequest $request){
         // dd($request->post_category_id);
         $post = Post::create([
@@ -70,7 +72,9 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    public function postEdit(Request $request){
+    //投稿編集のためのメソッド
+    //引数の「PostFormRequest」はバリデーション用ファイルを表している
+    public function postEdit(PostFormRequest $request){
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
@@ -84,6 +88,7 @@ class PostsController extends Controller
     }
 
     //メインカテゴリーの追加のためのメソッド
+    //引数の「MainCategoryFormRequest」はバリデーション用ファイルを表している
     public function mainCategoryCreate(MainCategoryFormRequest $request){
 
         MainCategory::create(['main_category' => $request->main_category_name]);
@@ -91,6 +96,7 @@ class PostsController extends Controller
     }
 
     //サブカテゴリーの追加のためのメソッド
+    //引数の「SubCategoryFormRequest」はバリデーション用ファイルを表している
     public function subCategoryCreate(SubCategoryFormRequest $request){
 
         SubCategory::create([

@@ -18,6 +18,7 @@
       </div>
 
       <div class="mt-3">
+        <!-- エラーメッセージ表示 -->
         @if($errors->first('post_title'))
         <span class="error_message">{{ $errors->first('post_title') }}</span>
         @endif
@@ -25,6 +26,7 @@
         <input type="text" class="w-100" form="postCreate" name="post_title" value="{{ old('post_title') }}">
       </div>
       <div class="mt-3">
+        <!-- エラーメッセージ表示 -->
         @if($errors->first('post_body'))
         <span class="error_message">{{ $errors->first('post_body') }}</span>
         @endif
@@ -58,13 +60,14 @@
         <!-- サブカテゴリーはroleが1, 2, 3のときのみ表示 -->
         @if (in_array(Auth::user()->role, [1, 2, 3]))
         <div class="mt-3">
-          <!-- エラーメッセージ表示 -->
+          <!-- エラーメッセージ表示① -->
           <!-- ->has()内は inputタグで送るname名 -->
           @if($errors->has('main_category'))
           <div class="text-danger" style="font-size:12px;">
             {{ $errors->first('main_category') }}
           </div>
           @endif
+          <!-- エラーメッセージ表示② -->
           @if($errors->has('sub_category_name'))
           <div class="text-danger" style="font-size:12px;">
             {{ $errors->first('sub_category_name') }}

@@ -8,11 +8,10 @@
         <!-- 投稿タイトル表示 -->
         <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
         <!-- サブカテゴリー表示 -->
-
+        <!-- 投稿内容($post)からリレーションで紐付けたサブカテゴリーを取得 -->
         @foreach($post->subCategories as $subCategory)
-          <span class="category_btn">{{ $subCategory->sub_category }}</span>
+        <span class="category_btn">{{ $subCategory->sub_category }}</span>
         @endforeach
-
         <div class="post_bottom_area d-flex">
           <div class="d-flex post_status">
             <div class="mr-5">
