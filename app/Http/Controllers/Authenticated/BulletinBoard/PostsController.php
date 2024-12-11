@@ -106,6 +106,7 @@ class PostsController extends Controller
         return redirect()->route('post.input');
     }
 
+    //投稿コメントのためのメソッド
     public function commentCreate(Request $request)
     {
         PostComment::create([
@@ -129,6 +130,7 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
 
+    //投稿いいねのためのメソッド
     public function postLike(Request $request){
         $user_id = Auth::id();
         $post_id = $request->post_id;
@@ -142,6 +144,7 @@ class PostsController extends Controller
         return response()->json();
     }
 
+    //投稿いいね解除のためのメソッド
     public function postUnLike(Request $request){
         $user_id = Auth::id();
         $post_id = $request->post_id;
