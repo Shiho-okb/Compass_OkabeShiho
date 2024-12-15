@@ -27,6 +27,16 @@ class PostsController extends Controller
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
+
+        //コントローラーで事前に「いいね」の集計をしておく
+        $likeCounts = \App\Models\Posts\Like::selectRaw('like_post_id, COUNT(*) as count')
+            ->groupBy('like_post_id')
+            ->pluck('count', 'like_post_id');
+
+        foreach ($posts as $post) {
+            $post->like_count = $likeCounts[$post->id] ?? 0;
+        }
+
         if(!empty($request->keyword)){
             $posts = Post::with('user', 'postComments')
             ->where('post_title', 'like', '%'.$request->keyword.'%')

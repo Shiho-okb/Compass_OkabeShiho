@@ -34,4 +34,12 @@ class Post extends Model
     public function commentCounts($post_id){
         return Post::with('postComments')->find($post_id)->postComments();
     }
+
+    // いいね数
+      // Likeモデルを使用して、like_post_id が現在の投稿（$this->id）に紐づいているレコードをデータベースから検索
+      // $this->id = Post モデルのインスタンス内で使われているため、現在の投稿の ID を参照している
+      // 検索した結果の件数（count()）を返す
+    public function getLikeCount(){
+        return \App\Models\Posts\Like::where('like_post_id', $this->id)->count();
+    }
 }
