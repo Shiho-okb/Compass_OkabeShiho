@@ -31,21 +31,32 @@ class PostsController extends Controller
         //キーワード検索の場合
           //$request->keyword が送信されている場合（空でない場合）に実行
         if(!empty($request->keyword)){
+            $sub_category = $request->category_word;
             $posts = Post::with('user', 'postComments')
+            //タイトルのあいまい検索
             ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            //投稿内容のあいまい検索
+            ->orWhere('post', 'like', '%' . $request->keyword . '%')
+            //サブカテゴリー名と完全一致する投稿を取得
+              //「投稿（Post）」モデルが「サブカテゴリー（SubCategory）」と多対多のリレーションを持っている場合
+              //投稿が持つ「サブカテゴリー」の中に条件を満たすものがあるかを確認
+              //検索ワード（$request）と一致するものがある投稿を取得
+            ->orWhereHas('subCategories', function ($query) use ($request) {
+                //サブカテゴリーの条件を指定
+                //サブカテゴリーテーブル（sub_categories）のサブカテゴリー名が、$request（検索されたキーワード）と一致するものだけを選ぶ
+                $query->where('sub_category', $request->keyword);
+            })->get();
 
         //サブカテゴリー検索の場合
           //$requestで category_word（サブカテゴリーIDなど）が送信されている場合に実行
         }else if($request->category_word){
             //bladeから送られてくる値
             $sub_category = $request->category_word;
-
             //指定したリレーションのデータも、一緒にデータベースから取得
             $posts = Post::with('user', 'postComments')
             //「投稿（Post）」モデルが「サブカテゴリー（SubCategory）」と多対多のリレーションを持っている場合
-            //投稿が持つ「サブカテゴリー」の中に条件を満たすものがあるかを確認
-            //サブカテゴリーID（$sub_category）と一致するものがある投稿を取得
+              //投稿が持つ「サブカテゴリー」の中に条件を満たすものがあるかを確認
+              //サブカテゴリーID（$sub_category）と一致するものがある投稿を取得
             ->whereHas('subCategories', function ($query) use ($sub_category) {
                 //サブカテゴリーの条件を指定
                 //サブカテゴリーテーブル（sub_categories）の id カラムが、変数 $sub_category に格納された値と一致するものだけを選ぶ

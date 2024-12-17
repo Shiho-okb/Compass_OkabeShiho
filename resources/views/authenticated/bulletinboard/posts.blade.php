@@ -45,7 +45,7 @@
       <div class="border m-4">
         <!-- 投稿画面遷移ボタン -->
         <div class=""><a href="{{ route('post.input') }}">投稿</a></div>
-        <!-- 検索窓 -->
+        <!-- 検索欄 -->
         <div class="">
           <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
           <input type="submit" value="検索" form="postSearchRequest">
