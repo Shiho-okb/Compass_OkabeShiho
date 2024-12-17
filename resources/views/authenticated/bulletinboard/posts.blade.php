@@ -43,7 +43,9 @@
     <!-- サイドバー -->
     <div class="other_area border w-25">
       <div class="border m-4">
+        <!-- 投稿画面遷移ボタン -->
         <div class=""><a href="{{ route('post.input') }}">投稿</a></div>
+        <!-- 検索窓 -->
         <div class="">
           <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
           <input type="submit" value="検索" form="postSearchRequest">
@@ -54,12 +56,17 @@
           <!-- メインカテゴリー表示 -->
           @foreach($categories as $category)
           <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}<span></li>
-          <!-- サブカテゴリー表示 -->
-          @foreach($category->subCategories as $subCategory)
-          <!-- {{ $subCategory->id }} で各カテゴリーのid（データベースのユニークID）を値として設定。 -->
-          <!-- 例えば、カテゴリーIDが 1 の場合、value="1"となる。 -->
-          <option value="{{ $subCategory->id }}" class="category_btn">{{ $subCategory->sub_category}}</option>
-          @endforeach
+            <!-- サブカテゴリー表示 -->
+            @foreach($category->subCategories as $subCategory)
+            <li>
+              <!-- {{ $subCategory->id }} で各カテゴリーのid（データベースのユニークID）を値として設定。 -->
+              <!-- 例えば、カテゴリーIDが 1 の場合、value="1"となる。 -->
+              <form method="GET" action="{{ route('post.show') }}" id="subCategoryForm{{ $subCategory->id }}">
+                <input type="hidden" name="category_word" value="{{ $subCategory->id }}">
+                <button type="submit" class="category_btn">{{ $subCategory->sub_category }}</button>
+              </form>
+            </li>
+            @endforeach
           @endforeach
         </ul>
       </div>

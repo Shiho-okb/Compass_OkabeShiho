@@ -28,17 +28,38 @@ class PostsController extends Controller
         $like = new Like;
         $post_comment = new Post;
 
+        //キーワード検索の場合
+          //$request->keyword が送信されている場合（空でない場合）に実行
         if(!empty($request->keyword)){
             $posts = Post::with('user', 'postComments')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
             ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+
+        //サブカテゴリー検索の場合
+          //$requestで category_word（サブカテゴリーIDなど）が送信されている場合に実行
         }else if($request->category_word){
+            //bladeから送られてくる値
             $sub_category = $request->category_word;
-            $posts = Post::with('user', 'postComments')->get();
+
+            //指定したリレーションのデータも、一緒にデータベースから取得
+            $posts = Post::with('user', 'postComments')
+            //「投稿（Post）」モデルが「サブカテゴリー（SubCategory）」と多対多のリレーションを持っている場合
+            //投稿が持つ「サブカテゴリー」の中に条件を満たすものがあるかを確認
+            //サブカテゴリーID（$sub_category）と一致するものがある投稿を取得
+            ->whereHas('subCategories', function ($query) use ($sub_category) {
+                //サブカテゴリーの条件を指定
+                //サブカテゴリーテーブル（sub_categories）の id カラムが、変数 $sub_category に格納された値と一致するものだけを選ぶ
+                $query->where('sub_category_id', $sub_category);
+            })->get();
+
+        //いいねした投稿の取得の場合
+          //like_posts がリクエストされた場合に実行
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')
                 ->whereIn('id', $likes)->get();
+        //自分の投稿のみ取得の場合
+          //my_posts がリクエストされた場合に実行
         }else if($request->my_posts){
             $posts = Post::with('user', 'postComments')
                 ->where('user_id', Auth::id())->get();
