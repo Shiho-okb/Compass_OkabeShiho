@@ -14,6 +14,7 @@ use App\Searchs\SearchResultFactories;
 class UsersController extends Controller
 {
 
+    //ユーザー検索のためのメソッド
     public function showUsers(Request $request){
         $keyword = $request->keyword;
         $category = $request->category;
@@ -27,12 +28,14 @@ class UsersController extends Controller
         return view('authenticated.users.search', compact('users', 'subjects'));
     }
 
+    //ユーザープロフィール表示のためのメソッド
     public function userProfile($id){
         $user = User::with('subjects')->findOrFail($id);
         $subject_lists = Subjects::all();
         return view('authenticated.users.profile', compact('user', 'subject_lists'));
     }
 
+    //ユーザープロフィール編集のためのメソッド
     public function userEdit(Request $request){
         $user = User::findOrFail($request->user_id);
         $user->subjects()->sync($request->subjects);
