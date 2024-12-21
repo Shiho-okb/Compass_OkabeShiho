@@ -20,6 +20,7 @@ class CalendarWeek{
    * @return
    */
 
+  //カレンダーに表示する「1週間の日付データ」計算のためのメソッド
    function getDays(){
      $days = [];
 

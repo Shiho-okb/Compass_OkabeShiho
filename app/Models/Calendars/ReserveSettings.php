@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReserveSettings extends Model
 {
-    // const UPDATED_AT = null;
-    // public $timestamps = false;
+    const UPDATED_AT = null;
+    public $timestamps = false;
 
     protected $fillable = [
         'setting_reserve',

@@ -11,13 +11,16 @@ use App\Models\USers\User;
 use Auth;
 use DB;
 
+//スクール予約画面のメソッドのグループ(まとまり)
 class CalendarController extends Controller
 {
+    // カレンダー表示のためのメソッド
     public function show(){
         $calendar = new CalendarView(time());
         return view('authenticated.calendar.general.calendar', compact('calendar'));
     }
 
+    // 予約のためのメソッド
     public function reserve(Request $request){
         DB::beginTransaction();
         try{

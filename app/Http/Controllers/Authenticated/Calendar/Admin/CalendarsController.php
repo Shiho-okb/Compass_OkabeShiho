@@ -12,23 +12,29 @@ use App\Models\USers\User;
 use Auth;
 use DB;
 
+//スクール予約確認画面・スクール予約詳細・スクール枠登録画面のメソッドのグループ(まとまり)
 class CalendarsController extends Controller
 {
+
+    // カレンダー表示のためのメソッド
     public function show(){
         $calendar = new CalendarView(time());
         return view('authenticated.calendar.admin.calendar', compact('calendar'));
     }
 
+    // 予約詳細表示のためのメソッド
     public function reserveDetail($date, $part){
         $reservePersons = ReserveSettings::with('users')->where('setting_reserve', $date)->where('setting_part', $part)->get();
         return view('authenticated.calendar.admin.reserve_detail', compact('reservePersons', 'date', 'part'));
     }
 
+    // 予約枠設定のためのメソッド
     public function reserveSettings(){
         $calendar = new CalendarSettingView(time());
         return view('authenticated.calendar.admin.reserve_setting', compact('calendar'));
     }
 
+    // 予約枠更新のためのメソッド
     public function updateSettings(Request $request){
         $reserveDays = $request->input('reserve_day');
         foreach($reserveDays as $day => $parts){

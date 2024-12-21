@@ -3,6 +3,7 @@ namespace App\Calendars\Admin;
 use Carbon\Carbon;
 use App\Models\Users\User;
 
+// スクール予約確認画面
 class CalendarView{
   private $carbon;
 
@@ -10,10 +11,12 @@ class CalendarView{
     $this->carbon = new Carbon($date);
   }
 
+  // カレンダータイトル作成のためのメソッド
   public function getTitle(){
     return $this->carbon->format('Y年n月');
   }
 
+  // カレンダー作成のためのメソッド
   public function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
@@ -31,16 +34,24 @@ class CalendarView{
     $html[] = '</thead>';
     $html[] = '<tbody>';
 
+    // カレンダーに表示する「週」のデータを取得
     $weeks = $this->getWeeks();
 
+    // 各週のループ処理
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
+      // 各日のループ処理
       $days = $week->getDays();
       foreach($days as $day){
+        // 日付の範囲を取得
         $startDay = $this->carbon->format("Y-m-01");
         $toDay = $this->carbon->format("Y-m-d");
+
+       // 日付ごとのセル生成
+        // 現在または過去の日付
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<td class="past-day border">';
+        // 未来の日付
         }else{
           $html[] = '<td class="border '.$day->getClassName().'">';
         }
@@ -57,6 +68,7 @@ class CalendarView{
     return implode("", $html);
   }
 
+  // カレンダーに表示する「週のデータ」計算のためのメソッド
   protected function getWeeks(){
     $weeks = [];
     $firstDay = $this->carbon->copy()->firstOfMonth();

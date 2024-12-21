@@ -16,6 +16,7 @@ class CalendarWeek{
     return "week-" . $this->index;
   }
 
+  //カレンダーに表示する「1週間の日付データ」計算のためのメソッド
   function getDays(){
     $days = [];
     $startDay = $this->carbon->copy()->startOfWeek();

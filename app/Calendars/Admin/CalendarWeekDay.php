@@ -4,6 +4,7 @@ namespace App\Calendars\Admin;
 use Carbon\Carbon;
 use App\Models\Calendars\ReserveSettings;
 
+// スクール予約確認画面の部品
 class CalendarWeekDay{
   protected $carbon;
 
