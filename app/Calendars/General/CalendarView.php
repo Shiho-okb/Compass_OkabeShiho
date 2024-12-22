@@ -54,7 +54,6 @@ class CalendarView{
         if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
           $html[] = '<td class="past-day calendar-td">';
           $html[] = $day->render();
-          $html[] = $day->getDate();
 
           // 過去日の予約状態を表示
           if (in_array($day->everyDay(), $day->authReserveDay())) {
