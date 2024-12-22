@@ -49,6 +49,7 @@ class CalendarWeekDay{
        $three_part_frame = '0';
      }
 
+    // スクール予約枠のプルダウン
      $html = [];
      $html[] = '<select name="getPart[]" class="border-primary" style="width:70px; border-radius:5px;" form="reserveParts">';
      $html[] = '<option value="" selected></option>';
@@ -71,6 +72,7 @@ class CalendarWeekDay{
      return implode('', $html);
    }
 
+   // 選択可能日数
    function getDate(){
      return '<input type="hidden" value="'. $this->carbon->format('Y-m-d') .'" name="getData[]" form="reserveParts">';
    }

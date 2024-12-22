@@ -74,6 +74,7 @@ class CalendarView{
         } else {
           $html[] = '<td class="calendar-td ' . $day->getClassName() . '">';
           $html[] = $day->render();
+          // 選択可能日数
           $html[] = $day->getDate();
 
           // 未来日の予約枠選択
@@ -87,6 +88,8 @@ class CalendarView{
               $reservePart = "リモ3部";
             }
             $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePart . '</button>';
+            // 未来日の日数(隠しinputタグの配列数を数えて、getDateの配列数と一致するように設置)
+            $html[] = '<input type="hidden" name="getPart[]" form="reserveParts">';
           } else {
             $html[] = $day->selectPart($day->everyDay());
           }

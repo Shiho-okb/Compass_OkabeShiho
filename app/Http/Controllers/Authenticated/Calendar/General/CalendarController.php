@@ -26,6 +26,7 @@ class CalendarController extends Controller
         try{
             $getPart = $request->getPart;
             $getDate = $request->getData;
+            // dd($getDate, $getPart);
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach($reserveDays as $key => $value){
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
