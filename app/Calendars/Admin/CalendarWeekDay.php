@@ -24,34 +24,49 @@ class CalendarWeekDay{
     return $this->carbon->format("Y-m-d");
   }
 
-  function dayPartCounts($ymd){
+
+  function dayPartCounts($ymd)
+  {
     $html = [];
-    $one_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
-    $two_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
-    $three_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
+
+    $one_part_count = ReserveSettings::where('setting_reserve', $ymd)
+      ->where('setting_part', '1')
+      ->withCount('users') // users リレーションをカウント
+      ->pluck('users_count')
+      ->sum();
+
+    $two_part_count = ReserveSettings::where('setting_reserve', $ymd)
+    ->where('setting_part', '2')
+    ->withCount('users') // users リレーションをカウント
+    ->pluck('users_count')
+    ->sum();
+
+    $three_part_count = ReserveSettings::where('setting_reserve', $ymd)
+    ->where('setting_part', '3')
+    ->withCount('users') // users リレーションをカウント
+    ->pluck('users_count')
+    ->sum();
 
     $html[] = '<div class="text-left">';
 
-    // 1部のリンクを生成
-    if($one_part){
-      $html[] = '<div>';
-      $html[] = '<a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 1]) . '" class="day_part m-0 pt-1">1部</a>';
-      $html[] = '</div>';
-    }
+    // 1部のリンクと予約人数
+    $html[] = '<div>';
+    $html[] = '<a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 1]) . '" class="day_part m-0 pt-1"> 1部 </a>';
+    $html[] = '<span class="day_part m-0 pt-1">' . $one_part_count . '</span>';
+    $html[] = '</div>';
 
-    // 2部のリンクを生成
-    if($two_part){
-      $html[] = '<div>';
-      $html[] = '<a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 2]) . '" class="day_part m-0 pt-1">2部</a>';
-      $html[] = '</div>';
-    }
+    // 2部のリンクと予約人数
+    $html[] = '<div>';
+    $html[] = '<a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 2]) . '" class="day_part m-0 pt-1"> 2部 </a>';
+    $html[] = '<span class="day_part m-0 pt-1">' . $two_part_count . '</span>';
+    $html[] = '</div>';
 
-    // 3部のリンクを生成
-    if($three_part){
-      $html[] = '<div>';
-      $html[] = '<a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 3]) . '" class="day_part m-0 pt-1">3部</a>';
-      $html[] = '</div>';
-    }
+    // 3部のリンクと予約人数
+    $html[] = '<div>';
+    $html[] = '<a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 3]) . '" class="day_part m-0 pt-1"> 3部 </a>';
+    $html[] = '<span class="day_part m-0 pt-1">' . $three_part_count . '</span>';
+    $html[] = '</div>';
+
     $html[] = '</div>';
     return implode("", $html);
   }
