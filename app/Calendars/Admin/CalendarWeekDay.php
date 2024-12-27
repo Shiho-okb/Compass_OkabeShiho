@@ -25,25 +25,28 @@ class CalendarWeekDay{
   }
 
 
-  function dayPartCounts($ymd)
-  {
+  function dayPartCounts($ymd){
     $html = [];
 
+    //ReserveSettingsテーブルから、setting_reserveカラム(開講日)が $ymd(指定された日付)と一致するレコードを絞り込む
     $one_part_count = ReserveSettings::where('setting_reserve', $ymd)
+      //setting_partカラムが 1（1部）と一致するレコードを絞り込む
       ->where('setting_part', '1')
-      ->withCount('users') // users リレーションをカウント
+      //予約設定に紐付けられた usersテーブルのレコード数(予約しているユーザーの人数)をカウント
+      //この結果として、各予約設定に users_count という仮想カラムが追加される
+      ->withCount('users')
       ->pluck('users_count')
       ->sum();
 
     $two_part_count = ReserveSettings::where('setting_reserve', $ymd)
     ->where('setting_part', '2')
-    ->withCount('users') // users リレーションをカウント
+    ->withCount('users')
     ->pluck('users_count')
     ->sum();
 
     $three_part_count = ReserveSettings::where('setting_reserve', $ymd)
     ->where('setting_part', '3')
-    ->withCount('users') // users リレーションをカウント
+    ->withCount('users')
     ->pluck('users_count')
     ->sum();
 
