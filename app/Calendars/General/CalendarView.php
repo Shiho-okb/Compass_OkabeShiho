@@ -87,7 +87,19 @@ class CalendarView{
             } else if ($reservePart == 3) {
               $reservePart = "リモ3部";
             }
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="' . $day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePart . '</button>';
+
+            // 予約削除
+            $html[] = '
+              <button
+                type="submit" class="js-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px"
+                data-reserve-id="'. $day->authReserveDate($day->everyDay())->first()->id .'"
+                data-date="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'"
+                data-part="' . $reservePart . '"
+              >
+              '.$reservePart.'
+              </button>
+            ';
+
             // 未来日の日数(隠しinputタグの配列数を数えて、getDateの配列数と一致するように設置)
             $html[] = '<input type="hidden" name="getPart[]" form="reserveParts">';
           } else {
@@ -104,7 +116,6 @@ class CalendarView{
     $html[] = '</div>';
     $html[] = '<form action="/reserve/calendar" method="post" id="reserveParts">' . csrf_field() . '</form>';
     $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">' . csrf_field() . '</form>';
-
     return implode('', $html);
   }
 

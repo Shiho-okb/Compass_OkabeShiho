@@ -63,4 +63,31 @@ $(function () {
     return false;
   });
 
+  $(document).ready(function () {
+    // モーダルを開く
+    $('.js-modal-open').on('click', function (e) {
+      // デフォルトの動作を無効化
+      e.preventDefault();
+      // ボタンの data 属性から予約ID、予約日、部分を取得
+      const reserveId = $(this).data('reserve-id');
+      const reserveDate = $(this).data('date');
+      const reservePart = $(this).data('part');
+
+      // モーダル内の hidden フィールドに予約IDを設定
+      $('#modal-reserve-id').val(reserveId);
+      // モーダル内の <span> に予約日と時間帯を設定
+      $('#reserve-date').text(reserveDate);
+      $('#reserve-part').text(reservePart);
+
+      // モーダルを表示
+      $('.js-modal').fadeIn();
+    });
+
+    // モーダルを閉じる
+    $('.js-modal-close').on('click', function () {
+      // モーダルを非表示
+      $('.js-modal').fadeOut();
+    });
+  });
+
 });

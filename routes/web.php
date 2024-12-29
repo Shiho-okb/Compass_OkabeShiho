@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function(){
             Route::namespace('General')->group(function(){
                 Route::get('calendar/{user_id}', [CalendarController::class, 'show'])->name('calendar.general.show');
                 Route::post('reserve/calendar', [CalendarController::class, 'reserve'])->name('reserveParts');
-                Route::post('delete/calendar', [CalendarController::class, 'delete'])->name('deleteParts');
+                Route::post('delete/calendar', [CalendarController::class, 'deleteParts'])->name('deleteParts');
             });
             // 講師に関するルーティング
             Route::namespace('Admin')->group(function(){
