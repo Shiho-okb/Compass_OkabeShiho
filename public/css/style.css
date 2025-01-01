@@ -146,10 +146,17 @@ img{
 .post_area {
   background: #FFF;
   border-radius: 10px;
+  margin-left: 0px !important;
 }
 
 .post_bottom_area {
   justify-content: space-between;
+}
+
+.like_btn{
+  color: #FFF;
+  color: transparent; /* 中を透明にする */
+  -webkit-text-stroke: 2px #999; /* 縁の色と太さ */
 }
 
 .like_btn,
@@ -199,6 +206,14 @@ img{
 
 .edit-modal-btn {
   justify-content: space-between;
+}
+
+.title {
+  color: black;
+}
+
+.post-input {
+  color: white !important;
 }
 
 /* 掲示板 コメント */
