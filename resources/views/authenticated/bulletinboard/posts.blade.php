@@ -15,7 +15,7 @@
           <!-- サブカテゴリー表示 -->
           <!-- 投稿内容($post)からリレーションで紐付けたサブカテゴリーを取得 -->
           @foreach($post->subCategories as $subCategory)
-          <span class="category_btn btn btn-info" style="background-color: #03AAD2;">{{ $subCategory->sub_category }}</span>
+          <span class="category_btn btn btn-info" style="background-color: #03AAD2; border-radius: 10px;">{{ $subCategory->sub_category }}</span>
           @endforeach
           <div class="d-flex post_status">
             <!-- コメント数 -->
