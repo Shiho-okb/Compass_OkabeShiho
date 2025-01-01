@@ -14,13 +14,15 @@
         </div>
         <div class="">
           @can('admin')
-          <span class="subject_edit_btn" style="font-size:16px; color: #05aad2;">選択科目の登録</span>
+          <span class="subject_edit_btn" style="font-size:16px; color: #05aad2; margin-right: 15px;">選択科目の登録</span>
+          <!-- 矢印アイコン -->
+          <span class="accordion-button"></span>
           <div class="subject_inner">
             <form action="{{ route('user.edit') }}" method="post" style="display: flex; align-items: center;">
               @foreach($subjects as $subject)
               <div>
                 <label style="margin-top: 0.5rem;">{{ $subject->subject }}</label>
-                <input style="margin-right: 10px;" type="checkbox" name="subjects" value="{{ $subject->id }}">
+                <input style="margin-right: 10px;" type="checkbox" name="subjects[]" value="{{ $subject->id }}">
               </div>
               @endforeach
               <input type="submit" value="登録" class="btn btn-primary">
