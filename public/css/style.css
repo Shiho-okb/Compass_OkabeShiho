@@ -97,6 +97,18 @@ img{
   width: 70%;
 }
 
+/* スクール予約詳細確認画面 */
+/* 偶数行に背景色を設定 */
+.detail tr:nth-child(even) {
+  background-color: #e2f0f2;
+}
+
+/* 奇数行の背景色を設定 */
+.detail tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+
 /* モーダル */
 .modal {
   display: none;
