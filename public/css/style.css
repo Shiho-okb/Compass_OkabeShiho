@@ -288,9 +288,9 @@ img{
   width: 800px;
   margin: 10px auto;
   height: 80vh;
-  overflow: scroll;
+  /* overflow: scroll; */
   padding: 10px;
-  background: #FFF;
+  /* background: #FFF; */
   border-radius: 5px;
 }
 
@@ -315,6 +315,7 @@ img{
 .subject_inner {
   display: none;
 }
+
 
 /* アコーディオンメニュー */
 .accordion-button::after {
