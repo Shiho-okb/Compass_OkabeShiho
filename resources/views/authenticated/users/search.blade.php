@@ -89,11 +89,11 @@
 
         <div>
           <p class="search_conditions" style="color: #6b6868; font-size: 14px; border-bottom: solid 1px #999393; width: 70%; padding-bottom: 5px;">
-            <span>検索条件の追加</span>
+            <span style="margin-right: 110px;">検索条件の追加</span>
             <!-- 矢印アイコン -->
             <span class="accordion-button search-accordion"></span>
           </p>
-          <div class="search_conditions_inner" style="background-color: #ecf1f5;">
+          <div class="accordion_inner" style="background-color: #ecf1f5;">
             <div>
               <label style="color: #6b6868; font-size: 14px;">性別</label>
               <div style="font-size:14px;">

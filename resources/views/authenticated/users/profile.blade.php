@@ -14,10 +14,10 @@
         </div>
         <div class="">
           @can('admin')
-          <span class="subject_edit_btn" style="font-size:16px; color: #05aad2; margin-right: 15px;">選択科目の登録</span>
+          <span class="" style="font-size:16px; color: #05aad2; margin-right: 15px;">選択科目の登録</span>
           <!-- 矢印アイコン -->
           <span class="accordion-button"></span>
-          <div class="subject_inner">
+          <div class="accordion_inner">
             <form action="{{ route('user.edit') }}" method="post" style="display: flex; align-items: center;">
               @foreach($subjects as $subject)
               <div>

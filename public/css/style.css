@@ -270,14 +270,17 @@ img{
   border-radius: 5px;
   padding: 0 5px;
   border: none;
-  background: #999;
-  color: #FFF;
+  /* background: #999; */
+  /* color: #FFF; */
 }
 
-.main_categories span,
 .sub_categories li input {
   list-style: none;
   cursor: pointer;
+}
+
+.main_categories span {
+  list-style: none;
 }
 
 /* ユーザー検索 */
@@ -302,21 +305,29 @@ img{
   height: 250px;
 }
 
-.search_conditions span {
-  cursor: pointer;
-}
-
 .search_conditions_inner {
   display: none;
   background: #FFF;
 }
 
-.subject_inner {
+.accordion_inner {
   display: none;
 }
 
 /* アコーディオンメニュー */
 .accordion-button::after {
+  display: inline-block;
+    content: "";
+    border-top: solid 3px #05aad2;
+    border-right: solid 3px #05aad2;
+    width: 10px;
+    height: 10px;
+    transform: translate(-100%, -25%) rotate(135deg);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.accordion_mainCategory-button::after {
   display: inline-block;
     content: "";
     border-top: solid 3px #05aad2;
@@ -334,6 +345,11 @@ img{
     cursor: pointer;
 }
 
+.accordion_mainCategory-button.open::after {
+    transform: translate(-100%, 25%) rotate(315deg);
+    cursor: pointer;
+}
+
 .search-accordion::after {
   display: inline-block;
   content: "";
@@ -344,5 +360,4 @@ img{
   transform: translate(-100%, -25%) rotate(135deg);
   transition: transform 0.3s ease;
   cursor: pointer;
-  margin-left: 110px;
 }
