@@ -108,7 +108,6 @@ img{
   background-color: #ffffff;
 }
 
-
 /* モーダル */
 .modal {
   display: none;
@@ -316,7 +315,6 @@ img{
   display: none;
 }
 
-
 /* アコーディオンメニュー */
 .accordion-button::after {
   display: inline-block;
@@ -334,4 +332,17 @@ img{
 .accordion-button.open::after {
     transform: translate(-100%, 25%) rotate(315deg);
     cursor: pointer;
+}
+
+.search-accordion::after {
+  display: inline-block;
+  content: "";
+  border-top: solid 2px black;
+  border-right: solid 2px black;
+  width: 10px;
+  height: 10px;
+  transform: translate(-100%, -25%) rotate(135deg);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  margin-left: 110px;
 }

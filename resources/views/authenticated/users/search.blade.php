@@ -9,7 +9,7 @@
           <span style="color: #b9bdc2;">ID : </span><span>{{ $user->id }}</span>
         </div>
         <div style="font-weight: 600;"><span style="color: #b9bdc2;">名前 : </span>
-          <a href="{{ route('user.profile', ['id' => $user->id]) }}">
+          <a style="text-decoration: none;" href="{{ route('user.profile', ['id' => $user->id]) }}">
             <span style="color: #05aad2;">{{ $user->over_name }}</span>
             <span style="color: #05aad2;">{{ $user->under_name }}</span>
           </a>
@@ -62,7 +62,7 @@
           <p style="margin-top: 60px; font-size: 18px; margin-bottom: 10px; color: #6b6868;">検索</p>
           <input
             type="text" class="free_word" name="keyword" placeholder="キーワードを検索" form="userSearchRequest"
-            style="border: none; background-color: #dbdfe3; height: 40px; border-radius: 5px; padding: 10px; width: 80%; margin-bottom: 10px; font-size: 14px;">
+            style="border: none; background-color: #dbdfe3; height: 40px; border-radius: 5px; padding: 10px; width: 70%; margin-bottom: 10px; font-size: 14px;">
         </div>
         <div>
           <div>
@@ -86,41 +86,53 @@
             <option value="DESC">降順</option>
           </select>
         </div>
-        <div class="">
-          <p class="m-0 search_conditions" style="color: #6b6868; font-size: 14px;"><span>検索条件の追加</span></p>
-          <div class="search_conditions_inner">
+
+        <div>
+          <p class="search_conditions" style="color: #6b6868; font-size: 14px; border-bottom: solid 1px #999393; width: 70%; padding-bottom: 5px;">
+            <span>検索条件の追加</span>
+            <!-- 矢印アイコン -->
+            <span class="accordion-button search-accordion"></span>
+          </p>
+          <div class="search_conditions_inner" style="background-color: #ecf1f5;">
             <div>
-              <label style="color: #6b6868;">性別</label>
-              <span>男</span><input type="radio" name="sex" value="1" form="userSearchRequest">
-              <span>女</span><input type="radio" name="sex" value="2" form="userSearchRequest">
-              <span>その他</span><input type="radio" name="sex" value="3" form="userSearchRequest">
+              <label style="color: #6b6868; font-size: 14px;">性別</label>
+              <div style="font-size:14px;">
+                <span>男</span><input type="radio" name="sex" value="1" form="userSearchRequest">
+                <span>女</span><input type="radio" name="sex" value="2" form="userSearchRequest">
+                <span>その他</span><input type="radio" name="sex" value="3" form="userSearchRequest">
+              </div>
             </div>
-            <div>
-              <label style="color: #6b6868;">権限</label>
-              <select name="role" form="userSearchRequest" class="engineer">
-                <option selected disabled>----</option>
-                <option value="1">教師(国語)</option>
-                <option value="2">教師(数学)</option>
-                <option value="3">教師(英語)</option>
-                <option value="4" class="">生徒</option>
-              </select>
+            <div style="margin-top: 10px;">
+              <label style="color: #6b6868; font-size: 14px;">権限</label>
+              <div>
+                <select name="role" form="userSearchRequest" class="engineer"
+                  style="background-color: #dbdfe3; margin-bottom: 10px; padding: 7px 15px 7px 10px; border-radius: 5px; font-size: 14px; border: none">
+                  <option selected disabled>----</option>
+                  <option value="1">教師(国語)</option>
+                  <option value="2">教師(数学)</option>
+                  <option value="3">教師(英語)</option>
+                  <option value="4" class="">生徒</option>
+                </select>
+              </div>
             </div>
             <div class="selected_engineer">
-              <label style="color: #6b6868;">選択科目</label>
-              @foreach($subjects as $subject)
+              <label style="color: #6b6868; font-size: 14px;">選択科目</label>
               <div>
-                <label>{{ $subject->subject }}</label>
-                <input type="checkbox" name="subjects" value="{{ $subject->id }}" form="userSearchRequest">
+                @foreach($subjects as $subject)
+                <label style="font-size: 14px;">{{ $subject->subject }}</label>
+                <input style="margin-right: 10px;" type="checkbox" name="subjects" value="{{ $subject->id }}" form="userSearchRequest">
+                @endforeach
               </div>
-              @endforeach
             </div>
           </div>
         </div>
+
         <div>
-          <input type="submit" name="search_btn" value="検索" form="userSearchRequest">
+          <input class="btn btn-info" type="submit" name="search_btn" value="検索" form="userSearchRequest"
+            style="background-color: #03AAD2; height: 40px; width: 70%; font-size: 14px; margin-top: 45px;">
         </div>
-        <div>
-          <input type="reset" value="リセット" form="userSearchRequest">
+        <div style="width: 70%; text-align: center;">
+          <input type="reset" value="リセット" form="userSearchRequest" style="border: none; color: #03AAD2; margin-top: 20px;">
         </div>
       </div>
       <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>
