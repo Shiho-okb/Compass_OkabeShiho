@@ -8,7 +8,7 @@
             <!-- 投稿内容($post)からリレーションで紐付けたサブカテゴリーを取得 -->
             @foreach($post->subCategories as $subCategory)
             <div>
-              <span class="category_btn btn btn-info" style="background-color: #03AAD2; border-radius: 10px; margin-bottom: 15px;">{{ $subCategory->sub_category }}</span>
+              <span class="category_btn btn btn-info" style="background-color: #03AAD2; border-radius: 10px; margin-bottom: 15px; cursor: default;">{{ $subCategory->sub_category }}</span>
             </div>
             @endforeach
             <!-- エラーメッセージ表示① -->

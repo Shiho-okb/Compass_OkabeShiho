@@ -196,15 +196,23 @@
           @endif
           <label class="d-block m-0" style="font-size:13px">役職</label>
         </div>
-        <div class="mt-1" style="display:flex; justify-content:space-between;">
-          <input type="radio" name="role" class="admin_role role" value="1">
-          <label style="font-size:13px; margin-bottom:0;">教師(国語)</label>
-          <input type="radio" name="role" class="admin_role role" value="2">
-          <label style="font-size:13px; margin-bottom:0;">教師(数学)</label>
-          <input type="radio" name="role" class="admin_role role" value="3">
-          <label style="font-size:13px; margin-bottom:0;">教師(英語)</label>
-          <input type="radio" name="role" class="other_role role" value="4">
-          <label style="font-size:13px; margin-bottom:0;" class="other_role">生徒</label>
+        <div class="" style="display:flex; justify-content:space-between;">
+          <div>
+            <input type="radio" name="role" class="admin_role role" value="1">
+            <label style="font-size:13px; margin-bottom:0;">教師(国語)</label>
+          </div>
+          <div>
+            <input type="radio" name="role" class="admin_role role" value="2">
+            <label style="font-size:13px; margin-bottom:0;">教師(数学)</label>
+          </div>
+          <div>
+            <input type="radio" name="role" class="admin_role role" value="3">
+            <label style="font-size:13px; margin-bottom:0;">教師(英語)</label>
+          </div>
+          <div>
+            <input type="radio" name="role" class="other_role role" value="4">
+            <label style="font-size:13px; margin-bottom:0;" class="other_role">生徒</label>
+          </div>
         </div>
 
         <div class="select_teacher d-none">

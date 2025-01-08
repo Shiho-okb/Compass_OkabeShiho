@@ -50,7 +50,9 @@
       <div class="">
         <!-- 投稿画面遷移ボタン -->
         <div class="btn btn-info" style="background-color: #03AAD2; width: 80%; margin-bottom: 20px;">
-          <a class="post-input" href="{{ route('post.input') }}">投稿</a>
+          <a class="post-input" href="{{ route('post.input') }}" style="display: block; text-align: center; width: 100%; height: 100%; color: white; text-decoration: none;">
+            投稿
+          </a>
         </div>
         <!-- 検索欄 -->
         <div class="" style="margin-bottom: 20px; display: flex;">
@@ -65,12 +67,10 @@
           style="background-color: #e5bb62; border: none; width: 40%; margin-bottom: 20px;">
 
         <ul>
-          <p>
-            <span style="color: #6b6868;">カテゴリー検索</span>
-          </p>
+          <p><span style="color: #6b6868;">カテゴリー検索</span></p>
           @foreach($categories as $category)
           <li class="main_categories" category_id="{{ $category->id }}"
-            style="width: 80%; position: relative; border-bottom: solid 1px #999393; margin-bottom: 15px; margin-top: 5px;">
+            style="width: 80%; position: relative; border-bottom: solid 1px #999393; margin-bottom: 15px; margin-top: 5px; cursor: pointer;">
             <span style="color: #6b6868;">{{ $category->main_category }}</span>
             <!-- 矢印アイコン -->
             <span class="accordion_mainCategory-button search-accordion" style="position: absolute; right: 10px;"></span>

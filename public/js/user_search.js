@@ -9,15 +9,14 @@ $(function () {
     });
   });
 
-
-  $(document).ready(function () {
-    // 矢印アイコンをクリックしたときの挙動
-    $('.accordion_mainCategory-button').click(function () {
+$(document).ready(function () {
+    // 矢印アイコンとボタンをクリックしたときの挙動
+    $('.main_categories').click(function () {
       // クリックされたボタンに対応する .accordion_mainCategory_inner のみを開閉
-      $(this).closest('li.main_categories').next('.accordion_mainCategory_inner').slideToggle();
+        $(this).next('.accordion_mainCategory_inner').slideToggle();
 
-      // 矢印アイコンの状態を変更
-      $(this).toggleClass('open');
+        // 矢印アイコンの状態を変更
+        $(this).find('.accordion_mainCategory-button').toggleClass('open');
     });
-  });
+});
 });
