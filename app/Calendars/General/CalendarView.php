@@ -49,10 +49,21 @@ class CalendarView{
         $startDay = $this->carbon->copy()->format("Y-m-01");
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
+        $isPastDay = $startDay <= $day->everyDay() && $toDay >= $day->everyDay();
+        $isSaturday = \Carbon\Carbon::parse($day->everyDay())->isSaturday();
+        $isSunday = \Carbon\Carbon::parse($day->everyDay())->isSunday();
+
         // 日付ごとのセル生成
         // 現在または過去の日付
-        if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-          $html[] = '<td class="past-day calendar-td">';
+        if ($isPastDay) {
+          // 過去の日付
+          if ($isSaturday) {
+            $html[] = '<td class="past-day border past-saturday">';
+          } elseif ($isSunday) {
+            $html[] = '<td class="past-day border past-sunday">';
+          } else {
+            $html[] = '<td class="past-day border">';
+          }
           $html[] = $day->render();
 
           // 過去日の予約状態を表示
@@ -65,9 +76,9 @@ class CalendarView{
             } else if ($reservePart == 3) {
               $reservePart = "3部";
             }
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">' . $reservePart . '参加</p>';
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px color:black !important;">' . $reservePart . '参加</p>';
           } else {
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px; color:black !important;">受付終了</p>';
           }
 
         // 未来の日付

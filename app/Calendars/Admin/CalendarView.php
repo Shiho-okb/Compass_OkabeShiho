@@ -47,14 +47,24 @@ class CalendarView{
         $startDay = $this->carbon->format("Y-m-01");
         $toDay = $this->carbon->format("Y-m-d");
 
-       // 日付ごとのセル生成
-        // 現在または過去の日付
-        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="past-day border">';
-        // 未来の日付
-        }else{
-          $html[] = '<td class="border '.$day->getClassName().'">';
-        }
+        $isPastDay = $startDay <= $day->everyDay() && $toDay >= $day->everyDay();
+        $isSaturday = \Carbon\Carbon::parse($day->everyDay())->isSaturday();
+        $isSunday = \Carbon\Carbon::parse($day->everyDay())->isSunday();
+
+        // 日付ごとのセル生成
+          // 現在または過去の日付
+          if ($isPastDay) {
+            if ($isSaturday) {
+              $html[] = '<td class="past-day border past-saturday">';
+            } elseif ($isSunday) {
+              $html[] = '<td class="past-day border past-sunday">';
+            } else {
+              $html[] = '<td class="past-day border">';
+            }
+          // 未来の日付
+          } else {
+            $html[] = '<td class="border ' . $day->getClassName() . '">';
+          }
         $html[] = $day->render();
         $html[] = $day->dayPartCounts($day->everyDay());
         $html[] = '</td>';

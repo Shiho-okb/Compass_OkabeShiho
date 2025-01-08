@@ -60,11 +60,13 @@ img{
   background: #D3D3D3;
 }
 
-.day-sat {
+.day-sat,
+.past-saturday {
   color: #0000FF;
 }
 
-.day-sun {
+.day-sun,
+.past-sunday {
   color: #FF0000;
 }
 
