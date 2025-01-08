@@ -1,9 +1,10 @@
 $(function () {
   $(document).ready(function () {
     // 矢印アイコンとボタンをクリックしたときの挙動
-    $('.accordion-button').click(function () {
+    $('.accordion-menu').click(function () {
       // メニューを表示/非表示
       $('.accordion_inner').slideToggle();
+
       // 矢印アイコンを回転
       $('.accordion-button').toggleClass('open');
     });

@@ -289,7 +289,7 @@ img{
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
+  width: 900px;
   margin: 10px auto;
   height: 80vh;
   /* overflow: scroll; */

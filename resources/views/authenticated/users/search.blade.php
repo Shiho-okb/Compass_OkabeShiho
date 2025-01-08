@@ -4,7 +4,8 @@
       @foreach($users as $user)
       <div
         class="border one_person"
-        style="width: 23%; height: 32%; background-color: #fff; border-radius:5px; box-shadow: 0px 0px 15px -5px #777777; margin: 7px; padding: 15px 15px 0px 15px;">
+        style="width: 23%; height: 32%; background-color: #fff; border-radius:10px; box-shadow: 0px 0px 15px -5px #777777; margin: 8px 8px 16px; padding:15px; display: flex
+; flex-direction: column; justify-content: space-between;">
         <div style="font-weight: 600;">
           <span style="color: #b9bdc2;">ID : </span><span>{{ $user->id }}</span>
         </div>
@@ -23,9 +24,9 @@
           @if($user->sex == 1)
           <span style="color: #b9bdc2;">性別 : </span><span>男</span>
           @elseif($user->sex == 2)
-          <span>性別 : </span><span>女</span>
+          <span style="color: #b9bdc2;">性別 : </span><span>女</span>
           @else
-          <span>性別 : </span><span>その他</span>
+          <span style="color: #b9bdc2;">性別 : </span><span>その他</span>
           @endif
         </div>
         <div style="font-weight: 600;">
@@ -88,10 +89,10 @@
         </div>
 
         <div>
-          <p class="search_conditions" style="color: #6b6868; font-size: 14px; border-bottom: solid 1px #999393; width: 70%; padding-bottom: 5px;">
-            <span style="margin-right: 110px;">検索条件の追加</span>
+          <p class="accordion-menu" style="color: #6b6868; font-size: 14px; border-bottom: solid 1px #999393; width: 70%; padding-bottom: 5px; cursor: pointer; position: relative;">
+            <span>検索条件の追加</span>
             <!-- 矢印アイコン -->
-            <span class="accordion-button search-accordion"></span>
+            <span class="accordion-button search-accordion" style="position: absolute; right: -5px;"></span>
           </p>
           <div class="accordion_inner" style="background-color: #ecf1f5;">
             <div>

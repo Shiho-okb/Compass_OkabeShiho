@@ -12,7 +12,7 @@
           <span>{{ $subject->subject }}</span>
           @endforeach
         </div>
-        <div class="">
+        <div class="accordion-menu" style="cursor: pointer;">
           @can('admin')
           <span class="" style="font-size:16px; color: #05aad2; margin-right: 15px;">選択科目の登録</span>
           <!-- 矢印アイコン -->
